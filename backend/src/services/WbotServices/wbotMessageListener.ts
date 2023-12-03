@@ -213,13 +213,12 @@ const verifyMediaMessage = async (
 };
 
 const prepareLocation = (msg: WbotMessage): WbotMessage => {
-  const gmapsUrl = `https://maps.google.com/maps?q=${msg.location.latitude}%2C${msg.location.longitude}&z=17`;
-  msg.body = `data:image/png;base64,${msg.body}|${gmapsUrl}`;
-  msg.body += `|${
-    msg.location.description
-      ? msg.location.description
-      : `${msg.location.latitude}, ${msg.location.longitude}`
-  }`;
+  const gmapsUrl = https://maps.google.com/maps?q=${msg.location.latitude}%2C${msg.location.longitude}&z=17;
+  msg.body = data:image/png;base64,${msg.body}|${gmapsUrl};
+  msg.body += |${msg.location.options
+      ? msg.location.options
+      : ${msg.location.latitude}, ${msg.location.longitude}
+    };
   return msg;
 };
 
@@ -245,14 +244,13 @@ const verifyMessage = async (
   await ticket.update({
     lastMessage:
       msg.type === "location"
-        ? msg.location.description
-          ? `Localization - ${msg.location.description.split("\\n")[0]}`
-          : "Localization"
+        ? msg.location.options || "Localization"
         : msg.body
   });
 
   await CreateMessageService({ messageData });
 };
+
 
 const verifyQueue = async (
   wbot: Session,
